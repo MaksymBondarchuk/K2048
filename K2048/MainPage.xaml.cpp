@@ -35,7 +35,20 @@ void K2048::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::
 
 void K2048::MainPage::GridGameBoard_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
 {
-
+	if (e->Key == Windows::System::VirtualKey::Down)
+	{
+		for (auto i = board_size - 2; 0 <= i; i--)
+		{
+			for (auto j = 0; j < board_size; j++)
+			{
+				//if (board[])
+			}
+		}
+	}
+	else if (e->Key == Windows::System::VirtualKey::Right)
+	{
+		auto x = 0;
+	}
 }
 
 
@@ -45,21 +58,52 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 
 	for (auto i = 0; i < board_size*board_size; i++)
 	{
-		//MainPage::d
-
 		TextBox^ square = ref new TextBox();
 		square->Text = i.ToString();
 		square->Width = 80;
 		square->Height = 80;
 		square->IsEnabled = false;
 		const int offset = 90;
-		square->Margin = Thickness((i % board_size) * offset, (i / board_size) * offset, 0, 0);
+		square->Margin = Thickness(Get_X(i) * offset, Get_Y(i) * offset, 0, 0);
 
 		square->HorizontalAlignment = Windows::UI::Xaml::HorizontalAlignment::Left;
 		square->VerticalAlignment = Windows::UI::Xaml::VerticalAlignment::Top;
-		//square->HorizontalAlignment = HorizontalAlignment;
-		//autkco a = square->HorizontalContentAlignment;
-		//square->Margin = Thickness(0, 0, (i % board_size) * offset, (i / board_size) * offset);
 		GridGameBoard->Children->Append(square);
 	}
+}
+
+
+void K2048::MainPage::Refresh()
+{
+	for (auto i = 0; i < board_size*board_size; i++)
+	{
+
+	}
+}
+
+void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
+{
+	if (e->Key == Windows::System::VirtualKey::Down)
+	{
+		auto x = 0;
+	}
+	else if (e->Key == Windows::System::VirtualKey::Right)
+	{
+		auto x = 0;
+	}
+}
+
+int K2048::MainPage::Get_X(int i)
+{
+	return i % board_size;
+}
+
+int K2048::MainPage::Get_Y(int i)
+{
+	return i / board_size;
+}
+
+int K2048::MainPage::Get_I(int x, int y)
+{
+	return y * board_size + x;
 }

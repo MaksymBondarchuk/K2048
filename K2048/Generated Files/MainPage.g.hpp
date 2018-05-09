@@ -29,6 +29,13 @@ void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target
     {
         case 1:
             {
+                ::Windows::UI::Xaml::Controls::Grid^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element1))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Input::KeyRoutedEventArgs^))&MainPage::Grid_KeyDown);
+            }
+            break;
+        case 2:
+            {
                 this->GridGameBoard = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->GridGameBoard))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Input::KeyRoutedEventArgs^))&MainPage::GridGameBoard_KeyDown);
@@ -36,10 +43,10 @@ void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::GridGameBoard_Loaded);
             }
             break;
-        case 2:
+        case 3:
             {
-                ::Windows::UI::Xaml::Controls::Button^ element2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
+                ::Windows::UI::Xaml::Controls::Button^ element3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
             }
             break;

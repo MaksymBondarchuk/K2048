@@ -24,7 +24,14 @@ namespace K2048
 		void GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
 		const int board_size = 4;
-		
 		int* board;
+
+		void Refresh();
+		
+		void Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
+
+		int Get_X(int i);
+		int Get_Y(int i);
+		int Get_I(int x, int y);
 	};
 }
