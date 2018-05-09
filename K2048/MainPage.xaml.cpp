@@ -52,8 +52,11 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 		square->Width = 80;
 		square->Height = 80;
 		square->IsEnabled = false;
-		const int offset = 170;
+		const int offset = 90;
 		square->Margin = Thickness((i % board_size) * offset, (i / board_size) * offset, 0, 0);
+
+		square->HorizontalAlignment = Windows::UI::Xaml::HorizontalAlignment::Left;
+		square->VerticalAlignment = Windows::UI::Xaml::VerticalAlignment::Top;
 		//square->HorizontalAlignment = HorizontalAlignment;
 		//autkco a = square->HorizontalContentAlignment;
 		//square->Margin = Thickness(0, 0, (i % board_size) * offset, (i / board_size) * offset);
