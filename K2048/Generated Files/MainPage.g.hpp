@@ -50,6 +50,13 @@ void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
             }
             break;
+        case 4:
+            {
+                ::Windows::UI::Xaml::Controls::Button^ element4 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element4))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click_1);
+            }
+            break;
     }
     _contentLoaded = true;
 }

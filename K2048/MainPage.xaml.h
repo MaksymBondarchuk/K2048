@@ -33,5 +33,6 @@ namespace K2048
 		int Get_X(int i);
 		int Get_Y(int i);
 		int Get_I(int x, int y);
+		void Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

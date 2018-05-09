@@ -29,7 +29,7 @@ MainPage::MainPage()
 
 void K2048::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-
+	Refresh();
 }
 
 
@@ -56,6 +56,8 @@ void K2048::MainPage::GridGameBoard_KeyDown(Platform::Object^ sender, Windows::U
 	{
 		auto x = 0;
 	}
+
+	Refresh();
 }
 
 
@@ -77,6 +79,15 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 		square->VerticalAlignment = Windows::UI::Xaml::VerticalAlignment::Top;
 		GridGameBoard->Children->Append(square);
 	}
+
+	for (auto i = 0; i < board_size*board_size; i++)
+		board[i] = 0;
+
+	board[0] = 2;
+	board[4] = 2;
+	board[8] = 2;
+	board[12] = 2;
+	Refresh();
 }
 
 
@@ -84,7 +95,8 @@ void K2048::MainPage::Refresh()
 {
 	for (auto i = 0; i < board_size*board_size; i++)
 	{
-
+		auto square = (TextBox^)GridGameBoard->Children->GetAt(i);
+		square->Text = board[i].ToString();
 	}
 }
 
@@ -92,12 +104,49 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 {
 	if (e->Key == Windows::System::VirtualKey::Down)
 	{
-		auto x = 0;
+		bool* merged = new bool[board_size*board_size];
+		for (auto i = 0; i < board_size*board_size; i++)
+			merged[i] = false;
+
+		for (auto j = 0; j < board_size; j++)
+		{
+			for (auto i = board_size - 1; 0 < i; i--)
+			{
+				for (auto i1 = i + 1; i1 < board_size &&
+					board[Get_I(j, i1)] == 0 &&
+					!merged[Get_I(j, i1 - 1)]; i1++)
+				{
+					board[Get_I(j, i1)] = board[Get_I(j, i1 - 1)];
+					board[Get_I(j, i1 - 1)] = 0;
+				}
+			}
+			for (auto i = board_size - 1; 0 < i; i--)
+			{
+				if (board[Get_I(j, i)] == board[Get_I(j, i - 1)])
+				{
+					board[Get_I(j, i)] *= 2;
+					merged[Get_I(j, i)] = true;
+					board[Get_I(j, i - 1)] = 0;
+				}
+			}
+			for (auto i = board_size - 1; 0 < i; i--)
+			{
+				for (auto i1 = i + 1; i1 < board_size &&
+					board[Get_I(j, i1)] == 0 &&
+					!merged[Get_I(j, i1 - 1)]; i1++)
+				{
+					board[Get_I(j, i1)] = board[Get_I(j, i1 - 1)];
+					board[Get_I(j, i1 - 1)] = 0;
+				}
+			}
+		}
 	}
 	else if (e->Key == Windows::System::VirtualKey::Right)
 	{
 		auto x = 0;
 	}
+
+	Refresh();
 }
 
 int K2048::MainPage::Get_X(int i)
@@ -113,4 +162,17 @@ int K2048::MainPage::Get_Y(int i)
 int K2048::MainPage::Get_I(int x, int y)
 {
 	return y * board_size + x;
+}
+
+
+void K2048::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	for (auto i = 0; i < board_size*board_size; i++)
+		board[i] = 0;
+
+	board[0] = 2;
+	board[4] = 2;
+	board[8] = 2;
+	board[12] = 2;
+	Refresh();
 }
