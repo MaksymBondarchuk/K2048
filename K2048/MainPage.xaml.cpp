@@ -112,25 +112,12 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 		{
 			for (auto i = board_size - 1; 0 < i; i--)
 			{
-				for (auto i1 = i + 1; i1 < board_size &&
-					board[Get_I(j, i1)] == 0 &&
-					!merged[Get_I(j, i1 - 1)]; i1++)
-				{
-					board[Get_I(j, i1)] = board[Get_I(j, i1 - 1)];
-					board[Get_I(j, i1 - 1)] = 0;
-				}
-			}
-			for (auto i = board_size - 1; 0 < i; i--)
-			{
 				if (board[Get_I(j, i)] == board[Get_I(j, i - 1)])
 				{
 					board[Get_I(j, i)] *= 2;
-					merged[Get_I(j, i)] = true;
 					board[Get_I(j, i - 1)] = 0;
 				}
-			}
-			for (auto i = board_size - 1; 0 < i; i--)
-			{
+
 				for (auto i1 = i + 1; i1 < board_size &&
 					board[Get_I(j, i1)] == 0 &&
 					!merged[Get_I(j, i1 - 1)]; i1++)
