@@ -41,7 +41,14 @@ void K2048::MainPage::GridGameBoard_KeyDown(Platform::Object^ sender, Windows::U
 		{
 			for (auto j = 0; j < board_size; j++)
 			{
-				//if (board[])
+				if (board[Get_I(j, i)] == board[Get_I(j, i + 1)])
+				{
+					board[Get_I(j, i + 1)] *= 2;
+					board[Get_I(j, i)] = 0;
+				}
+
+				if (board[Get_I(j, i + 1)] == 0)
+					board[Get_I(j, i + 1)] = board[Get_I(j, i)];
 			}
 		}
 	}
