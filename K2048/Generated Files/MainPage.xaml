@@ -8,8 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+	<Grid>
+		<Grid x:ConnectionId='1' x:Name="GridGameBoard" HorizontalAlignment="Left" Height="824" Margin="10,48,0,0" VerticalAlignment="Top" Width="1257"                                                               BorderBrush="#FFDF0000" Background="#FFE58484"/>
+		<Button x:ConnectionId='2' Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"                     />
 
-    </Grid>
+	</Grid>
 </Page>
 

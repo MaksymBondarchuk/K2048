@@ -25,8 +25,25 @@ void ::K2048::MainPage::InitializeComponent()
 
 void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target)
 {
-    __connectionId;         // unreferenced 
-    __target;               // unreferenced
+    switch (__connectionId)
+    {
+        case 1:
+            {
+                this->GridGameBoard = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->GridGameBoard))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Input::KeyRoutedEventArgs^))&MainPage::GridGameBoard_KeyDown);
+                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->GridGameBoard))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::GridGameBoard_Loaded);
+            }
+            break;
+        case 2:
+            {
+                ::Windows::UI::Xaml::Controls::Button^ element2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
+            }
+            break;
+    }
     _contentLoaded = true;
 }
 

@@ -25,3 +25,38 @@ MainPage::MainPage()
 {
 	InitializeComponent();
 }
+
+
+void K2048::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
+}
+
+
+void K2048::MainPage::GridGameBoard_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
+{
+
+}
+
+
+void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	board = new int[board_size*board_size];
+
+	for (auto i = 0; i < board_size*board_size; i++)
+	{
+		//MainPage::d
+
+		TextBox^ square = ref new TextBox();
+		square->Text = i.ToString();
+		square->Width = 80;
+		square->Height = 80;
+		square->IsEnabled = false;
+		const int offset = 170;
+		square->Margin = Thickness((i % board_size) * offset, (i / board_size) * offset, 0, 0);
+		//square->HorizontalAlignment = HorizontalAlignment;
+		//autkco a = square->HorizontalContentAlignment;
+		//square->Margin = Thickness(0, 0, (i % board_size) * offset, (i / board_size) * offset);
+		GridGameBoard->Children->Append(square);
+	}
+}

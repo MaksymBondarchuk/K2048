@@ -7,6 +7,15 @@
 //------------------------------------------------------------------------------
 
 
+namespace Windows {
+    namespace UI {
+        namespace Xaml {
+            namespace Controls {
+                ref class Grid;
+            }
+        }
+    }
+}
 
 namespace K2048
 {
@@ -23,6 +32,7 @@ namespace K2048
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::Grid^ GridGameBoard;
     };
 }
 
