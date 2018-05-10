@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid KeyDown="Grid_KeyDown">
-		<Grid x:Name="GridGameBoard" HorizontalAlignment="Left" Height="824" Margin="10,48,0,0" VerticalAlignment="Top" Width="1257" KeyDown="GridGameBoard_KeyDown" Loaded="GridGameBoard_Loaded" BorderBrush="#FFDF0000" Background="#FFE58484"/>
+		<Grid x:Name="GridGameBoard" HorizontalAlignment="Left" Height="824" Margin="10,48,0,0" VerticalAlignment="Top" Width="1257" Loaded="GridGameBoard_Loaded" BorderBrush="#FFDF0000" Background="#FFE58484"/>
 		<Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 		<Button Content="Button" HorizontalAlignment="Left" Margin="97,10,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 

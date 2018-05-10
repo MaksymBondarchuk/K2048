@@ -32,35 +32,6 @@ void K2048::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::
 	Refresh();
 }
 
-
-void K2048::MainPage::GridGameBoard_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
-{
-	if (e->Key == Windows::System::VirtualKey::Down)
-	{
-		for (auto i = board_size - 2; 0 <= i; i--)
-		{
-			for (auto j = 0; j < board_size; j++)
-			{
-				if (board[Get_I(j, i)] == board[Get_I(j, i + 1)])
-				{
-					board[Get_I(j, i + 1)] *= 2;
-					board[Get_I(j, i)] = 0;
-				}
-
-				if (board[Get_I(j, i + 1)] == 0)
-					board[Get_I(j, i + 1)] = board[Get_I(j, i)];
-			}
-		}
-	}
-	else if (e->Key == Windows::System::VirtualKey::Right)
-	{
-		auto x = 0;
-	}
-
-	Refresh();
-}
-
-
 void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	board = new int[board_size*board_size];
