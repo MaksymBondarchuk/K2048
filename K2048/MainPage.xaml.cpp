@@ -55,9 +55,9 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 		board[i] = 0;
 
 	board[0] = 2;
-	board[4] = 2;
-	board[8] = 2;
-	board[12] = 2;
+	board[1] = 2;
+	board[2] = 2;
+	board[3] = 2;
 	Refresh();
 }
 
@@ -81,7 +81,7 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 	{
 		for (auto j = 0; j < board_size; j++)
 		{
-			for (auto i = board_size - 1; 0 < i; i--)
+			for (auto i = board_size - 1; 0 <= i; i--)
 			{
 				if (board[Get_I(j, i)] == board[Get_I(j, i - 1)])
 				{
@@ -103,7 +103,7 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 	{
 		for (auto j = 0; j < board_size; j++)
 		{
-			for (auto i = 0; i < board_size - 1; i++)
+			for (auto i = 0; i < board_size; i++)
 			{
 				if (board[Get_I(j, i)] == board[Get_I(j, i + 1)])
 				{
@@ -111,7 +111,7 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 					board[Get_I(j, i + 1)] = 0;
 				}
 
-				for (auto i1 = i - 1; 0 < i1 &&
+				for (auto i1 = i - 1; 0 <= i1 &&
 					board[Get_I(j, i1)] == 0 &&
 					!merged[Get_I(j, i1 + 1)]; i1--)
 				{
@@ -123,22 +123,44 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 	}
 	else if (e->Key == Windows::System::VirtualKey::Left)
 	{
-		for (auto ii = 0; ii < board_size; ii++)
+		for (auto i = 0; i < board_size; i++)
 		{
-			for (auto jj = 0; jj < board_size - 1; jj++)
+			for (auto j = 0; j < board_size; j++)
 			{
-				if (board[Get_I(jj, ii)] == board[Get_I(jj + 1, ii)])
+				if (board[Get_I(j, i)] == board[Get_I(j + 1, i)])
 				{
-					board[Get_I(jj, ii)] *= 2;
-					board[Get_I(jj + 1, ii)] = 0;
+					board[Get_I(j, i)] *= 2;
+					board[Get_I(j + 1, i)] = 0;
 				}
 
-				for (auto j1 = jj - 1; 0 < j1 &&
-					board[Get_I(j1, ii)] == 0 &&
-					!merged[Get_I(j1 + 1, ii)]; j1--)
+				for (auto j1 = j - 1; 0 <= j1 &&
+					board[Get_I(j1, i)] == 0 &&
+					!merged[Get_I(j1 + 1, i)]; j1--)
 				{
-					board[Get_I(j1, ii)] = board[Get_I(j1 + 1, ii)];
-					board[Get_I(j1 + 1, ii)] = 0;
+					board[Get_I(j1, i)] = board[Get_I(j1 + 1, i)];
+					board[Get_I(j1 + 1, i)] = 0;
+				}
+			}
+		}
+	}
+	else if (e->Key == Windows::System::VirtualKey::Right)
+	{
+		for (auto i = 0; i < board_size; i++)
+		{
+			for (auto j = board_size - 1; 0 <= j; j--)
+			{
+				if (board[Get_I(j, i)] == board[Get_I(j - 1, i)])
+				{
+					board[Get_I(j, i)] *= 2;
+					board[Get_I(j - 1, i)] = 0;
+				}
+
+				for (auto j1 = j + 1; j1 < board_size &&
+					board[Get_I(j1, i)] == 0 &&
+					!merged[Get_I(j1 - 1, i)]; j1++)
+				{
+					board[Get_I(j1, i)] = board[Get_I(j1 - 1, i)];
+					board[Get_I(j1 - 1, i)] = 0;
 				}
 			}
 		}
