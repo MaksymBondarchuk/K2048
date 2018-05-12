@@ -12,6 +12,7 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class Grid;
+                ref class Button;
             }
         }
     }
@@ -33,6 +34,7 @@ namespace K2048
         bool _contentLoaded;
     
         private: ::Windows::UI::Xaml::Controls::Grid^ GridGameBoard;
+        private: ::Windows::UI::Xaml::Controls::Button^ ButtonNewGame;
     };
 }
 

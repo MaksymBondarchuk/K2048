@@ -26,12 +26,16 @@ namespace K2048
 		int* board;
 
 		void Refresh();
-		
+
 		void Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
 
 		int Get_X(int i);
 		int Get_Y(int i);
 		int Get_I(int x, int y);
+
+		bool Get_New_Number();
+
 		void Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void ButtonNewGame_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }
