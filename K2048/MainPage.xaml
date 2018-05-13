@@ -5,12 +5,16 @@
     xmlns:local="using:K2048"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+	xmlns:Windows10FallCreatorsUpdate="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+	mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid KeyDown="Grid_KeyDown">
 		<Grid x:Name="GridGameBoard" HorizontalAlignment="Left" Height="824" Margin="10,80,0,0" VerticalAlignment="Top" Width="1257" Loaded="GridGameBoard_Loaded" BorderBrush="#FFDF0000" Background="#FFE58484"/>
 		<Button x:Name="ButtonNewGame" Content="New Game" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="ButtonNewGame_Click"/>
+		<Border x:Name="BorderGameOver" BorderBrush="Black" HorizontalAlignment="Center" Height="1022" Margin="0,48,0,0" VerticalAlignment="Top" Width="1899" Visibility="Collapsed">
+			<TextBlock HorizontalAlignment="Center" Text="Game Over" TextWrapping="Wrap" VerticalAlignment="Center" Height="105" Width="856" Windows10FallCreatorsUpdate:HorizontalTextAlignment="Center" TextAlignment="Center" FontSize="72"/>
+		</Border>
 
 	</Grid>
 </Page>

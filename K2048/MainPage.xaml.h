@@ -33,7 +33,9 @@ namespace K2048
 		int Get_Y(int i);
 		int Get_I(int x, int y);
 
+		int Get_Count_Of_Empty_Squares();
 		bool Get_New_Number();
+		bool Is_Game_Over();
 
 		void Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void ButtonNewGame_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);

@@ -6,6 +6,9 @@
 //------------------------------------------------------------------------------
 #include "pch.h"
 
+#pragma warning(push)
+#pragma warning(disable: 4100) // unreferenced formal parameter
+
 #if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BINDING_DEBUG_OUTPUT
 extern "C" __declspec(dllimport) int __stdcall IsDebuggerPresent();
 #endif
@@ -27,27 +30,32 @@ void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target
 {
     switch (__connectionId)
     {
-        case 1:
-            {
-                ::Windows::UI::Xaml::Controls::Grid^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element1))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Input::KeyRoutedEventArgs^))&MainPage::Grid_KeyDown);
-            }
-            break;
-        case 2:
-            {
-                this->GridGameBoard = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->GridGameBoard))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::GridGameBoard_Loaded);
-            }
-            break;
-        case 3:
-            {
-                this->ButtonNewGame = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->ButtonNewGame))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::ButtonNewGame_Click);
-            }
-            break;
+    case 1:
+        {
+            ::Windows::UI::Xaml::Controls::Grid^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element1))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::Input::KeyRoutedEventArgs^))&MainPage::Grid_KeyDown);
+        }
+        break;
+    case 2:
+        {
+            this->GridGameBoard = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->GridGameBoard))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::GridGameBoard_Loaded);
+        }
+        break;
+    case 3:
+        {
+            this->ButtonNewGame = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->ButtonNewGame))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::ButtonNewGame_Click);
+        }
+        break;
+    case 4:
+        {
+            this->BorderGameOver = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
+        }
+        break;
     }
     _contentLoaded = true;
 }
@@ -58,5 +66,7 @@ void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target
     __target;               // unreferenced
     return nullptr;
 }
+
+#pragma warning(pop)
 
 

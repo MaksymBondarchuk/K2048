@@ -43,7 +43,7 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 		square->Width = 80;
 		square->Height = 80;
 		square->IsEnabled = false;
-		square->FontSize = 48;
+		square->FontSize = board[i] / 1000 ? 12 : board[i] / 100 ? 24 : 48;
 		square->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Black);
 		const int offset = 90;
 		square->Margin = Thickness(Get_X(i) * offset, Get_Y(i) * offset, 0, 0);
@@ -56,17 +56,24 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 	for (auto i = 0; i < board_size*board_size; i++)
 		board[i] = 0;
 
-	//Get_New_Number();
-	board[0] = 2;
-	board[4] = 8;
-	board[5] = 2;
-	board[8] = 2;
-	board[9] = 32;
-	board[10] = 2;
-	board[12] = 8;
-	board[13] = 256;
-	board[14] = 32;
-	Refresh();
+	Get_New_Number();
+	//board[0] = 2;
+	//board[1] = 4;
+	//board[2] = 8;
+	//board[3] = 16;
+	//board[4] = 32;
+	//board[5] = 64;
+	//board[6] = 128;
+	//board[7] = 256;
+	//board[8] = 2;
+	//board[9] = 4;
+	//board[10] = 8;
+	//board[11] = 16;
+	//board[12] = 32;
+	//board[13] = 64;
+	//board[14] = 128;
+	//board[15] = 128;
+	//Refresh();
 }
 
 
@@ -76,6 +83,7 @@ void K2048::MainPage::Refresh()
 	{
 		auto square = (TextBox^)GridGameBoard->Children->GetAt(i);
 		square->Text = board[i] == 0 ? "" : board[i].ToString();
+		square->FontSize = board[i] / 1000 ? 12 : board[i] / 100 ? 24 : 48;
 	}
 }
 
@@ -206,7 +214,7 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 					continue;
 
 				for (auto i1 = i - 1; 0 <= i1 &&
-					board[Get_I(j, i1)] == 0 ; i1--)
+					board[Get_I(j, i1)] == 0; i1--)
 				{
 					board[Get_I(j, i1)] = board[Get_I(j, i1 + 1)];
 					board[Get_I(j, i1 + 1)] = 0;
@@ -345,7 +353,13 @@ void K2048::MainPage::Grid_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::
 	}
 
 	if (moved)
+	{
 		Get_New_Number();
+		if (Is_Game_Over())
+		{
+			BorderGameOver->Visibility = Windows::UI::Xaml::Visibility::Visible;
+		}
+	}
 }
 
 int K2048::MainPage::Get_X(int i)
@@ -367,14 +381,22 @@ int K2048::MainPage::Get_I(int x, int y)
 	return y * board_size + x;
 }
 
-bool K2048::MainPage::Get_New_Number()
+int K2048::MainPage::Get_Count_Of_Empty_Squares()
 {
 	int count_of_zeros = 0;
+
 	for (int i = 0; i < board_size * board_size; i++)
 	{
 		if (board[i] == 0)
 			count_of_zeros++;
 	}
+
+	return count_of_zeros;
+}
+
+bool K2048::MainPage::Get_New_Number()
+{
+	int count_of_zeros = Get_Count_Of_Empty_Squares();
 
 	if (count_of_zeros == 0)
 		return false;
@@ -399,6 +421,194 @@ bool K2048::MainPage::Get_New_Number()
 	board[zeros_indeces[where_to_put_new_number]] = new_number;
 
 	Refresh();
+
+	return true;
+}
+
+bool K2048::MainPage::Is_Game_Over()
+{
+	if (Get_Count_Of_Empty_Squares() != 0)
+		return false;
+
+	bool* merged = new bool[board_size*board_size];
+	for (auto i = 0; i < board_size*board_size; i++)
+		merged[i] = false;
+
+	for (auto j = 0; j < board_size; j++)
+	{
+		for (auto i = board_size - 1; 0 < i; i--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j, i - 1)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j, i - 1)])
+				return false;
+		}
+
+		for (auto i = board_size - 1; 0 <= i; i--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto i1 = i + 1; i1 < board_size &&
+				board[Get_I(j, i1)] == 0 &&
+				!merged[Get_I(j, i1 - 1)]; i1++)
+				return false;
+		}
+
+		for (auto i = board_size - 1; 0 < i; i--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j, i - 1)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j, i - 1)])
+				return false;
+		}
+
+		for (auto i = board_size - 1; 0 <= i; i--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto i1 = i + 1; i1 < board_size &&
+				board[Get_I(j, i1)] == 0; i1++)
+				return false;
+		}
+	}
+
+	for (auto j = 0; j < board_size; j++)
+	{
+		for (auto i = 0; i < board_size - 1; i++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j, i + 1)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j, i + 1)])
+				return false;
+		}
+
+		for (auto i = 0; i < board_size; i++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto i1 = i - 1; 0 <= i1 &&
+				board[Get_I(j, i1)] == 0 &&
+				!merged[Get_I(j, i1 + 1)]; i1--)
+				return false;
+		}
+
+		for (auto i = 0; i < board_size - 1; i++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j, i + 1)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j, i + 1)])
+				return false;
+		}
+
+		for (auto i = 0; i < board_size; i++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto i1 = i - 1; 0 <= i1 &&
+				board[Get_I(j, i1)] == 0; i1--)
+				return false;
+		}
+	}
+
+	for (auto i = 0; i < board_size; i++)
+	{
+		for (auto j = 0; j < board_size - 1; j++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j + 1, i)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j + 1, i)])
+				return false;
+		}
+
+		for (auto j = 0; j < board_size; j++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto j1 = j - 1; 0 <= j1 &&
+				board[Get_I(j1, i)] == 0 &&
+				!merged[Get_I(j1 + 1, i)]; j1--)
+				return false;
+		}
+
+		for (auto j = 0; j < board_size - 1; j++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j + 1, i)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j + 1, i)])
+				return false;
+		}
+
+		for (auto j = 0; j < board_size; j++)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto j1 = j - 1; 0 <= j1 &&
+				board[Get_I(j1, i)] == 0; j1--)
+				return false;
+		}
+	}
+
+	for (auto i = 0; i < board_size; i++)
+	{
+		for (auto j = board_size - 1; 0 < j; j--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j - 1, i)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j - 1, i)])
+				return false;
+		}
+
+		for (auto j = board_size - 1; 0 <= j; j--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto j1 = j + 1; j1 < board_size &&
+				board[Get_I(j1, i)] == 0 &&
+				!merged[Get_I(j1 - 1, i)]; j1++)
+				return false;
+		}
+
+		for (auto j = board_size - 1; 0 < j; j--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			if (board[Get_I(j, i)] == board[Get_I(j - 1, i)] &&
+				!merged[Get_I(j, i)] && !merged[Get_I(j - 1, i)])
+				return false;
+		}
+
+		for (auto j = board_size - 1; 0 <= j; j--)
+		{
+			if (board[Get_I(j, i)] == 0)
+				continue;
+
+			for (auto j1 = j + 1; j1 < board_size &&
+				board[Get_I(j1, i)] == 0; j1++)
+				return false;
+		}
+	}
 
 	return true;
 }

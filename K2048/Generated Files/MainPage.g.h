@@ -13,6 +13,7 @@ namespace Windows {
             namespace Controls {
                 ref class Grid;
                 ref class Button;
+                ref class Border;
             }
         }
     }
@@ -31,10 +32,16 @@ namespace K2048
         virtual ::Windows::UI::Xaml::Markup::IComponentConnector^ GetBindingConnector(int connectionId, ::Platform::Object^ target);
     
     private:
+        void UnloadObject(::Windows::UI::Xaml::DependencyObject^ dependencyObject);
+        void DisconnectUnloadedObject(int connectionId);
+    
+    private:
         bool _contentLoaded;
+    
     
         private: ::Windows::UI::Xaml::Controls::Grid^ GridGameBoard;
         private: ::Windows::UI::Xaml::Controls::Button^ ButtonNewGame;
+        private: ::Windows::UI::Xaml::Controls::Border^ BorderGameOver;
     };
 }
 
