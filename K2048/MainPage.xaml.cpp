@@ -46,7 +46,7 @@ void K2048::MainPage::GridGameBoard_Loaded(Platform::Object^ sender, Windows::UI
 		square->FontSize = board[i] / 1000 ? 12 : board[i] / 100 ? 24 : 48;
 		square->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Black);
 		const int offset = 90;
-		square->Margin = Thickness(Get_X(i) * offset, Get_Y(i) * offset, 0, 0);
+		square->Margin = Thickness(10 + Get_X(i) * offset, 10 + Get_Y(i) * offset, 0, 0);
 
 		square->HorizontalAlignment = Windows::UI::Xaml::HorizontalAlignment::Left;
 		square->VerticalAlignment = Windows::UI::Xaml::VerticalAlignment::Top;
