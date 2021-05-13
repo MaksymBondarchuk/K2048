@@ -150,6 +150,8 @@ const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
     return nullptr;
 }
 
+#pragma warning(push)
+#pragma warning(disable: 4691)
 ::Platform::Collections::Vector<::Windows::UI::Xaml::Markup::IXamlMetadataProvider^>^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::OtherProviders::get()
 {
     if(_otherProviders == nullptr)
@@ -159,6 +161,7 @@ const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
     }
     return _otherProviders;
 }
+#pragma warning(pop)
 
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::CreateXamlType(::Platform::String^ typeName)
 {

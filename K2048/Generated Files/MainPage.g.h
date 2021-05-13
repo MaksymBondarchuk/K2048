@@ -38,6 +38,7 @@ namespace K2048
     private:
         bool _contentLoaded;
     
+        class MainPage_obj1_Bindings;
     
         private: ::Windows::UI::Xaml::Controls::Grid^ GridGameBoard;
         private: ::Windows::UI::Xaml::Controls::Button^ ButtonNewGame;

@@ -9,10 +9,10 @@
 	mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<Grid x:ConnectionId='1'                       >
-		<Grid x:ConnectionId='2' x:Name="GridGameBoard" HorizontalAlignment="Left" Height="370" Margin="10,80,0,0" VerticalAlignment="Top" Width="370"                               BorderBrush="#FFDF0000" Background="#FFE58484"/>
-		<Button x:ConnectionId='3' x:Name="ButtonNewGame" Content="New Game" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"                            />
-		<Border x:ConnectionId='4' x:Name="BorderGameOver" BorderBrush="Black" HorizontalAlignment="Center" Height="1022" Margin="0,48,0,0" VerticalAlignment="Top" Width="1899" Visibility="Collapsed">
+	<Grid x:ConnectionId='2'                       >
+		<Grid x:ConnectionId='3' x:Name="GridGameBoard" HorizontalAlignment="Left" Height="370" Margin="10,80,0,0" VerticalAlignment="Top" Width="370"                               BorderBrush="#FFDF0000" Background="#FFE58484"/>
+		<Button x:ConnectionId='4' x:Name="ButtonNewGame" Content="New Game" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"                            />
+		<Border x:ConnectionId='5' x:Name="BorderGameOver" BorderBrush="Black" HorizontalAlignment="Center" Height="1022" Margin="0,48,0,0" VerticalAlignment="Top" Width="1899" Visibility="Collapsed">
 			<TextBlock HorizontalAlignment="Center" Text="Game Over" TextWrapping="Wrap" VerticalAlignment="Center" Height="105" Width="856" Windows10FallCreatorsUpdate:HorizontalTextAlignment="Center" TextAlignment="Center" FontSize="72"/>
 		</Border>
 

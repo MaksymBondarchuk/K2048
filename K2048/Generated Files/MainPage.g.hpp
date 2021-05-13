@@ -30,28 +30,28 @@ void ::K2048::MainPage::Connect(int __connectionId, ::Platform::Object^ __target
 {
     switch (__connectionId)
     {
-    case 1:
+    case 2:
         {
-            ::Windows::UI::Xaml::Controls::Grid^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element1))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
+            ::Windows::UI::Xaml::Controls::Grid^ element2 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element2))->KeyDown += ref new ::Windows::UI::Xaml::Input::KeyEventHandler(this, (void (::K2048::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::Input::KeyRoutedEventArgs^))&MainPage::Grid_KeyDown);
         }
         break;
-    case 2:
+    case 3:
         {
             this->GridGameBoard = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(this->GridGameBoard))->Loaded += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::GridGameBoard_Loaded);
         }
         break;
-    case 3:
+    case 4:
         {
             this->ButtonNewGame = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->ButtonNewGame))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::K2048::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::ButtonNewGame_Click);
         }
         break;
-    case 4:
+    case 5:
         {
             this->BorderGameOver = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
         }
